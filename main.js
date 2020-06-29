@@ -7,11 +7,11 @@ const height = canvas.height = window.innerHeight;
 
 // 定义关于 Ball 的常量
 let ballConfig = {
-  maxLen: 3, // 球的个数
+  maxLen: 6, // 球的个数
   minSize: 25, // 球的最小半径
   maxSize: 35, // 球的最大半径
   minVel: 1, // 球的最小速度
-  maxVel: 2, // 球的最大速度
+  maxVel: 3, // 球的最大速度
   bgColor: 'rgba(0, 0, 0)', //背景颜色
   transColor: 'rgba(0, 0, 0, 0.35)', //球的运动过渡背景颜色，透明度越高，球的运动轨迹越明显
 };
