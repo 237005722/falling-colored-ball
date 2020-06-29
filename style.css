@@ -1,0 +1,45 @@
+html, body {
+  margin: 0;
+}
+
+html {
+  font-family: sans-serif;
+  height: 100%;
+}
+
+body {
+  overflow: hidden;
+  height: inherit;
+}
+
+h1 {
+  font-size: 1rem;
+  letter-spacing: 1px;
+  position: absolute;
+  margin: 0;
+  top: 10px;
+  right: 10px;
+
+  color: white;
+  text-shadow: 0 0 4px white;
+}
+
+.control {
+  position: absolute;
+  margin: 0;
+  top: 40px;
+  right: 10px;
+}
+
+.control button {
+  background-color: white;
+  border: none;
+  border-radius: 15px;
+  padding: 5px 15px;
+  margin-left: 10px
+}
+
+.control button:active,
+.control button:focus {
+  border: none;
+}
