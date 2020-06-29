@@ -9,11 +9,39 @@
 
   <body>
     <h1>彩球游戏，当前玩家<span id="name"></span>，当前生命值<span id="life"></span>，当前得分<span id="score"></span></h1>
-    <div class="control">
-      <button type="button" onClick="againGame()">重来</button>
-      <button type="button" onClick="startGame()">开始</button>
-      <button type="button" onClick="pauseGame()">暂停</button>
-    </div>
+    <introduce onClick="showIntroduce()">
+      <img src="introduction.png">
+    </introduce>
+    <setting>
+      <div>
+        <label for="maxLen">
+          球的个数：<input type="range" name="maxLen" value="6" min="1" max="30" />
+        </label>
+        <label for="minSize">
+          最小半径：<input type="range" name="minSize" value="25" min="10" max="30" />
+        </label>
+        <label for="maxSize">
+          最大半径：<input type="range" name="maxSize" value="35" min="30" max="50" />
+        </label>
+        <label for="minVel">
+          最小速度：<input type="range" name="minVel" value="1" min="1" max="3" />
+        </label>
+        <label for="maxVel">
+          最大速度：<input type="range" name="maxVel" value="3" min="3" max="10" />
+        </label>
+        <label>
+          <button type="button" onClick="saveSetting()">保 存</button>
+          <button type="button" onClick="showSetting()">取 消</button>
+        </label>
+      </div>
+    </setting>
+    <control>
+      <button type="button" onClick="showIntroduce()">玩 法</button>
+      <button type="button" onClick="showSetting()">设 置</button>
+      <button type="button" onClick="againGame()">重 来</button>
+      <button type="button" onClick="startGame()">开 始</button>
+      <button type="button" onClick="pauseGame()">暂 停</button>
+    </control>
     <canvas></canvas>
 
     <script src="main.js"></script>
