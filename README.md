@@ -1,7 +1,12 @@
 # falling-colored-ball
 坠落的小彩球
 
+## GitHub Pages The Site Is Published At 
+
+[https://237005722.github.io/falling-colored-ball/](https://237005722.github.io/falling-colored-ball/)
+
 #### 介绍
+
 坠落的小彩球，随机生成5种颜色的彩球从天而降，不同彩球有不同的得分和生命值。玩家默认5点生命值和0得分，开始游戏后尽快点击这些彩球阻止它们坠地（到达下边界），但是要注意彩球的颜色，有些颜色需要多次点击，有些颜色不能点击，如果生命值归零则游戏结束。
 
 #### 游戏规则
