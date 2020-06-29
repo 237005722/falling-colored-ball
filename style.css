@@ -22,24 +22,29 @@ h1 {
 
   color: white;
   text-shadow: 0 0 4px white;
+  z-index: 999;
 }
 
 .control {
   position: absolute;
   margin: 0;
-  top: 40px;
+  top: 45px;
   right: 10px;
+  z-index: 999;
 }
 
 .control button {
   background-color: white;
+  box-shadow: 0 0 4px white;
   border: none;
+  outline: none;
   border-radius: 15px;
   padding: 5px 15px;
-  margin-left: 10px
+  margin-left: 10px;
 }
 
 .control button:active,
 .control button:focus {
   border: none;
+  outline: none;
 }
