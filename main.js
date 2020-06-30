@@ -5,13 +5,17 @@ const ctx = canvas.getContext('2d')
 const width = canvas.width = window.innerWidth
 const height = canvas.height = window.innerHeight
 
-// 定义关于 Ball 的常量
+// 定义关于 Ball 的常量，可设置
 let ballConfig = {
   maxLen: 6, // 球的个数
   minSize: 25, // 球的最小半径
   maxSize: 35, // 球的最大半径
   minVel: 1, // 球的最小速度
   maxVel: 4, // 球的最大速度
+}
+
+// 定义关于 ctx 的常量
+let ctxConfig = {
   bgColor: 'rgba(0, 0, 0)', // 背景颜色
   transColor: 'rgba(0, 0, 0, 0.25)' // 球的运动过渡背景颜色，透明度越高，球的运动轨迹越明显
 }
@@ -88,9 +92,12 @@ User.prototype.update = function(key, value = '') {
 
 // 定义User更新dom函数
 User.prototype.updateText = function() {
-  document.getElementById('name').innerText = this.name
-  document.getElementById('life').innerText = this.life
-  document.getElementById('score').innerText = this.score
+  const keys = ['name', 'life', 'score']
+  keys.forEach(key => {
+    if (document.getElementById(key)) {
+      document.getElementById(key).innerText = this[key]
+    }
+  })
 }
 
 // 定义 Ball 构造器
@@ -116,8 +123,6 @@ Ball.prototype.update = function() {
   // 是否触到下边界
   if((this.y + this.size) >= height) {
     const ball = this
-    // 球触到下边界的处理
-    borderWork(ball)
     // 重置
     const size = random(ballConfig.minSize, ballConfig.maxSize)
     this.x = random(0 + size, width - size)
@@ -126,6 +131,8 @@ Ball.prototype.update = function() {
     this.velY = random(ballConfig.minVel, ballConfig.maxVel)
     this.color = randomColor()
     this.size = size
+    // 球触到下边界的处理
+    borderWork(ball)
   }
   this.y += this.velY
 }
@@ -160,8 +167,6 @@ canvas.onclick=function(e){
       // 满足点击次数要求
       if (balls[j].color.clicked >= balls[j].color.click) {
         const ball = balls[j]
-        // 点击球的处理
-        clickWork(ball)
         // 重置
         const size = random(ballConfig.minSize, ballConfig.maxSize)
         balls[j].x = random(0 + size, width - size)
@@ -170,6 +175,8 @@ canvas.onclick=function(e){
         balls[j].velY = random(ballConfig.minVel, ballConfig.maxVel)
         balls[j].color = randomColor()
         balls[j].size = size
+        // 点击球的处理
+        clickWork(ball)
       }
     }
   }
@@ -238,7 +245,7 @@ function initBalls() {
     balls.push(ball)
   }
   console.log('balls', balls)
-  ctx.fillStyle = ballConfig.bgColor
+  ctx.fillStyle = ctxConfig.bgColor
   ctx.fillRect(0, 0, width, height)
 }
 
@@ -252,7 +259,7 @@ let cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimat
 let myReq
 function loop() {
   // 将整个画布的颜色设置成半透明的黑色，在下一个视图画出来时用来遮住之前的视图的。如果不这样做得话，你就会在屏幕上看到一条蛇的形状而不是小球的运动了。
-  ctx.fillStyle = ballConfig.transColor
+  ctx.fillStyle = ctxConfig.transColor
   ctx.fillRect(0, 0, width, height)
 
   for(let i = 0; i < balls.length; i++) {
@@ -302,17 +309,12 @@ function showSetting() {
 
 // 保存设置
 function saveSetting() {
-  const maxLen = document.getElementsByName('maxLen')[0].value
-  const minSize = document.getElementsByName('minSize')[0].value
-  const maxSize = document.getElementsByName('maxSize')[0].value
-  const minVel = document.getElementsByName('minVel')[0].value
-  const maxVel = document.getElementsByName('maxVel')[0].value
-
-  ballConfig.maxLen = Number(maxLen)
-  ballConfig.minSize = Number(minSize)
-  ballConfig.maxSize = Number(maxSize)
-  ballConfig.minVel = Number(minVel)
-  ballConfig.maxVel = Number(maxVel)
+  const keys = Object.keys(ballConfig)
+  keys.forEach(key => {
+    if (document.getElementsByName(key).length > 0) {
+      ballConfig[key] = Number(document.getElementsByName(key)[0].value)
+    }
+  })
   console.log('ballConfig', ballConfig)
 
   againGame()
