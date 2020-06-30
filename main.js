@@ -20,6 +20,12 @@ let ctxConfig = {
   transColor: 'rgba(0, 0, 0, 0.25)' // 球的运动过渡背景颜色，透明度越高，球的运动轨迹越明显
 }
 
+// 定义关于 User 的常量
+let userConfig = {
+  life: 5, // 初始生命值
+  score: 0 // 初始得分
+}
+
 // 生成随机数的函数
 function random(min,max) {
   const num = Math.floor(Math.random() * (max - min)) + min
@@ -77,7 +83,7 @@ function randomColor() {
 }
 
 // 定义 User 构造器，默认生命值5，分数0
-function User(name = '', life = 5, score = 0) {
+function User(name = 'SomeBody', life = userConfig.life, score = userConfig.score) {
   this.name = name
   this.life = life // 生命值
   this.score = score // 得分
@@ -309,6 +315,7 @@ function showSetting() {
 
 // 保存设置
 function saveSetting() {
+  // 设置球相关属性
   const keys = Object.keys(ballConfig)
   keys.forEach(key => {
     if (document.getElementsByName(key).length > 0) {
@@ -316,6 +323,15 @@ function saveSetting() {
     }
   })
   console.log('ballConfig', ballConfig)
+
+  // 设置玩家相关属性
+  const userKeys = Object.keys(userConfig)
+  userKeys.forEach(key => {
+    if (document.getElementsByName(key).length > 0) {
+      userConfig[key] = Number(document.getElementsByName(key)[0].value)
+    }
+  })
+  console.log('userConfig', userConfig)
 
   againGame()
   showSomeDom('setting')
