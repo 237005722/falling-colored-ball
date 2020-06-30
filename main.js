@@ -123,6 +123,8 @@ Ball.prototype.update = function() {
   // 是否触到下边界
   if((this.y + this.size) >= height) {
     const ball = this
+    // 球触到下边界的处理
+    borderWork(ball)
     // 重置
     const size = random(ballConfig.minSize, ballConfig.maxSize)
     this.x = random(0 + size, width - size)
@@ -131,8 +133,6 @@ Ball.prototype.update = function() {
     this.velY = random(ballConfig.minVel, ballConfig.maxVel)
     this.color = randomColor()
     this.size = size
-    // 球触到下边界的处理
-    borderWork(ball)
   }
   this.y += this.velY
 }
@@ -167,6 +167,8 @@ canvas.onclick=function(e){
       // 满足点击次数要求
       if (balls[j].color.clicked >= balls[j].color.click) {
         const ball = balls[j]
+        // 点击球的处理
+        clickWork(ball)
         // 重置
         const size = random(ballConfig.minSize, ballConfig.maxSize)
         balls[j].x = random(0 + size, width - size)
@@ -175,8 +177,6 @@ canvas.onclick=function(e){
         balls[j].velY = random(ballConfig.minVel, ballConfig.maxVel)
         balls[j].color = randomColor()
         balls[j].size = size
-        // 点击球的处理
-        clickWork(ball)
       }
     }
   }
