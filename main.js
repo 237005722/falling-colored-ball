@@ -11,7 +11,7 @@ let ballConfig = {
   minSize: 25, // 球的最小半径
   maxSize: 35, // 球的最大半径
   minVel: 1, // 球的最小速度
-  maxVel: 3, // 球的最大速度
+  maxVel: 4, // 球的最大速度
   bgColor: 'rgba(0, 0, 0)', // 背景颜色
   transColor: 'rgba(0, 0, 0, 0.25)' // 球的运动过渡背景颜色，透明度越高，球的运动轨迹越明显
 }
@@ -267,7 +267,7 @@ function loop() {
 // 开始动画
 function startGame() {
   if (user.life <= 0) {
-    alert('生命值为0，请点击重新')
+    alert('生命值为0，请点击重来')
     return
   }
   myReq = requestAnimationFrame(loop)
