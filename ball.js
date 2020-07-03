@@ -28,7 +28,7 @@ class Ball {
     {
       color: 'white',
       click: 1, // 需要点击的次数
-      clicked: 0, // 已点击的次数，满足click次数后会重置
+      // clicked: 0, // 已点击的次数，每次调用randomColor()时初始化clicked
       score: -1, // 点击一次的得分
       life: -1, // 点击一次得的生命值
       border: 0 // 触到下边界得的生命值
@@ -36,7 +36,7 @@ class Ball {
     {
       color: 'grey',
       click: 1,
-      clicked: 0,
+      // clicked: 0,
       score: 1,
       life: 0,
       border: -1
@@ -44,7 +44,7 @@ class Ball {
     {
       color: 'green',
       click: 1,
-      clicked: 0,
+      // clicked: 0,
       score: 1,
       life: 1,
       border: 0
@@ -52,7 +52,7 @@ class Ball {
     {
       color: 'yellow',
       click: 2,
-      clicked: 0,
+      // clicked: 0,
       score: 1,
       life: 0,
       border: -2
@@ -60,7 +60,7 @@ class Ball {
     {
       color: 'red',
       click: 3,
-      clicked: 0,
+      // clicked: 0,
       score: 1,
       life: 0,
       border: -3
@@ -75,8 +75,13 @@ class Ball {
 
   // 生成随机颜色值的函数
   static randomColor () {
+    // 先重置操作
+    const colorConfig = Ball.colorConfig.map((color) => {
+      color['clicked'] = 0 // 重置clicked次数
+      return color
+    })
     // 随机颜色类0-5，random包括0不包括5
-    return Ball.colorConfig[Ball.random(0, Ball.colorConfig.length)]
+    return colorConfig[Ball.random(0, colorConfig.length)]
   }
 
   // 初始化所有彩球
