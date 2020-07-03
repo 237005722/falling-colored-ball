@@ -26,6 +26,50 @@ let userConfig = {
   score: 0 // 初始得分
 }
 
+// 定义关于 颜色 衍生的属性，5种颜色，随机获取
+let colorConfig = [ // 可自行扩展
+  {
+    color: 'white',
+    click: 1, // 需要点击的次数
+    // clicked: 0, // 已点击的次数，每次调用randomColor()时初始化clicked
+    score: -1, // 点击一次的得分
+    life: -1, // 点击一次得的生命值
+    border: 0 // 触到下边界得的生命值
+  },
+  {
+    color: 'grey',
+    click: 1,
+    // clicked: 0,
+    score: 1,
+    life: 0,
+    border: -1
+  },
+  {
+    color: 'green',
+    click: 1,
+    // clicked: 0,
+    score: 1,
+    life: 1,
+    border: 0
+  },
+  {
+    color: 'yellow',
+    click: 2,
+    // clicked: 0,
+    score: 1,
+    life: 0,
+    border: -2
+  },
+  {
+    color: 'red',
+    click: 3,
+    // clicked: 0,
+    score: 1,
+    life: 0,
+    border: -3
+  }
+]
+
 // 生成随机数的函数
 function random(min,max) {
   const num = Math.floor(Math.random() * (max - min)) + min
@@ -34,51 +78,13 @@ function random(min,max) {
 
 // 生成随机颜色值的函数
 function randomColor() {
-  // 定义关于 颜色 衍生的属性，5种颜色，随机获取
-  const colorConfig = [ // 可自行扩展
-    {
-      color: 'white',
-      click: 1, // 需要点击的次数
-      clicked: 0, // 已点击的次数，满足click次数后会重置
-      score: -1, // 点击一次的得分
-      life: -1, // 点击一次得的生命值
-      border: 0 // 触到下边界得的生命值
-    },
-    {
-      color: 'grey',
-      click: 1,
-      clicked: 0,
-      score: 1,
-      life: 0,
-      border: -1
-    },
-    {
-      color: 'green',
-      click: 1,
-      clicked: 0,
-      score: 1,
-      life: 1,
-      border: 0
-    },
-    {
-      color: 'yellow',
-      click: 2,
-      clicked: 0,
-      score: 1,
-      life: 0,
-      border: -2
-    },
-    {
-      color: 'red',
-      click: 3,
-      clicked: 0,
-      score: 1,
-      life: 0,
-      border: -3
-    }
-  ]
+  // 先重置操作
+  const colorConfig2 = colorConfig.map((color) => {
+    color['clicked'] = 0 // 重置clicked次数
+    return color
+  })
   // 随机颜色类0-5，random包括0不包括5
-  const color = colorConfig[random(0, colorConfig.length)]
+  const color = colorConfig2[random(0, colorConfig2.length)]
   return color
 }
 
