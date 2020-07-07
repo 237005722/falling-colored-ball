@@ -9,6 +9,7 @@ class Ball {
     this.velY = velY // y轴速度
     this.color = color // 颜色类
     this.size = size // 半径大小
+    this.velSpeed = 0 // 球的速度的递增速度，如一轮后，velY = velY + velSpeed
   }
 
   // 定义所有彩球
@@ -20,7 +21,7 @@ class Ball {
     minSize: 25, // 球的最小半径
     maxSize: 35, // 球的最大半径
     minVel: 1, // 球的最小速度
-    maxVel: 4, // 球的最大速度
+    maxVel: 4 // 球的最大速度
   }
 
   // 定义关于 颜色 衍生的属性，5种颜色，随机获取， 可设置
@@ -132,21 +133,28 @@ class Ball {
       borderWork(this)
       // 重置
       this.init({ width, height })
+      // 速度递增，增加难度
+      this.velSpeed += 0.1
+      this.velY += this.velSpeed
     }
     this.y += this.velY
   }
 
   // 定义碰撞检测函数
   collisionDetect () {
-    for(let j = 0; j < Ball.balls.length; j++) {
-      if(this !== Ball.balls[j]) {
-        const dx = this.x - Ball.balls[j].x
-        const dy = this.y - Ball.balls[j].y
+    for(const ball of Ball.balls) {
+      if(this !== ball) {
+        const dx = this.x - ball.x
+        const dy = this.y - ball.y
         const distance = Math.sqrt(dx * dx + dy * dy)
         // 检测两个小球是否相撞：两个小球中心的距离是否小于两个小球的半径之和
-        if (distance < this.size + Ball.balls[j].size) {
+        if (distance < this.size + ball.size) {
           // 碰撞则改变颜色
-          Ball.balls[j].color = this.color = Ball.randomColor()
+          ball.color = Ball.randomColor()
+          // 速度变化
+          ball.velY = ball.velY - 0.5
+          this.velY = this.velY + 0.5
+          break
         }
       }
     }
